@@ -21,7 +21,7 @@ import Footer from "./components/Footer";
 
 const App = () => {
   return (
-    <div className="px-4 sm:px-[7vw] md:px-[vw] lg:px-[6vw]">
+    <div className="px-4 sm:px-[7vw] md:px-[vw] lg:px-[2vw]">
       {/**priginal lg:px-[9vw] */}
       <Navbar />
       <hr className="w-fullborder-none h-[1.5px] bg-gray-700 items-center" />
