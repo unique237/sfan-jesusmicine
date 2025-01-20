@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
-import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
-import { assets } from '../assets/assets';
+import React, { useState, useEffect } from "react";
+import { NavLink } from "react-router-dom";
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import { assets } from "../assets/assets";
 
 const LatestNews = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -14,68 +14,86 @@ const LatestNews = () => {
     };
 
     handleResize(); // Initialize on component mount
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
 
-    return () => window.removeEventListener('resize', handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   // Array of card data
   const cards = [
     {
       image: assets.img_9,
-      heading: 'Exciting News 1',
-      text: 'Discover the latest happenings in our community.',
-      link: '/actualités/article',
+      heading: "Exciting News 1",
+      text: "Discover the latest happenings in our community.",
+      link: "/actualités/article",
     },
     {
       image: assets.img_2,
-      heading: 'Exciting News 2',
-      text: 'Stay updated with what’s going on.',
-      link: '/actualités/article',
+      heading: "Exciting News 2",
+      text: "Stay updated with what’s going on.",
+      link: "/actualités/article",
     },
     {
       image: assets.img_3,
-      heading: 'Exciting News 3',
-      text: 'Find out more about our recent events.',
-      link: '/actualités/article',
+      heading: "Exciting News 3",
+      text: "Find out more about our recent events.",
+      link: "/actualités/article",
     },
     {
       image: assets.img_4,
-      heading: 'Exciting News 4',
-      text: 'Explore the latest stories and updates.',
-      link: '/actualités/article',
+      heading: "Exciting News 4",
+      text: "Explore the latest stories and updates.",
+      link: "/actualités/article",
     },
     {
       image: assets.img_5,
-      heading: 'Exciting News 5',
-      text: 'Get insights into our latest projects.',
-      link: '/actualités/article',
+      heading: "Exciting News 5",
+      text: "Get insights into our latest projects.",
+      link: "/actualités/article",
     },
     {
       image: assets.img_6,
-      heading: 'Exciting News 6',
-      text: 'Read all about our recent accomplishments.',
-      link: '/actualités/article',
+      heading: "Exciting News 6",
+      text: "Read all about our recent accomplishments.",
+      link: "/actualités/article",
     },
   ];
 
   const maxIndex = cards.length - cardsPerView;
 
   const moveLeft = () => {
-    setCurrentIndex((prevIndex) => (prevIndex === 0 ? maxIndex : prevIndex - 1));
+    setCurrentIndex((prevIndex) =>
+      prevIndex === 0 ? maxIndex : prevIndex - 1
+    );
   };
 
   const moveRight = () => {
-    setCurrentIndex((prevIndex) => (prevIndex === maxIndex ? 0 : prevIndex + 1));
+    setCurrentIndex((prevIndex) =>
+      prevIndex === maxIndex ? 0 : prevIndex + 1
+    );
   };
 
   return (
-    <div className="relative w-full max-w-9xl mx-auto p-6">
-      <h2 className="text-4xl font-bold text-center mb-6 text-blue-500">ACTUALITES</h2>
+    <div className="relative w-full max-w-10xl mx-auto p-6">
+      <h2 className="text-4xl font-bold text-center mb-6 text-blue-500">
+        Dernières Actualités
+      </h2>
+      <p className="text-gray-800 text-center italic px-6 mb-6">
+        <strong>
+          Découvrez les actualités récentes de notre communauté.
+        </strong>
+        <br />
+        Restez informés des derniers événements, des enseignements, des projets,
+        et des moments forts du SFAN. Rejoignez-nous pour célébrer,
+        partager et grandir ensemble dans la foi. Ne manquez aucune des annonces
+        importantes et des rendez-vous spirituels à venir.
+      </p>
       <div className="relative overflow-hidden">
         <div
           className="flex transition-transform duration-500"
-          style={{ transform: `translateX(-${currentIndex * (100 / cardsPerView)}%)` }}
+          style={{
+            transform: `translateX(-${currentIndex * (100 / cardsPerView)}%)`,
+          }}
         >
           {cards.map((card, index) => (
             <div
@@ -83,7 +101,7 @@ const LatestNews = () => {
               className={`w-[calc(100%/${cardsPerView})] flex-shrink-0 p-4`} // Dynamically adjust card width
             >
               <div className="bg-white shadow-md rounded-lg overflow-hidden">
-                <div className="w-full h-52 relative object-fill">
+                <div className="w-full h-52 relative object-cover">
                   <img
                     src={card.image}
                     alt={card.heading}
@@ -91,7 +109,10 @@ const LatestNews = () => {
                   />
                 </div>
                 <div className="p-4">
-                  <NavLink to={card.link} className="text-lg font-bold text-blue-600 hover:underline">
+                  <NavLink
+                    to={card.link}
+                    className="text-lg font-bold text-blue-600 hover:underline"
+                  >
                     {card.heading}
                   </NavLink>
                   <p className="text-gray-600 mt-2">{card.text}</p>
@@ -99,7 +120,7 @@ const LatestNews = () => {
                     to={card.link}
                     className="inline-block mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition"
                   >
-                    Read More
+                    Voir plus...
                   </NavLink>
                 </div>
               </div>
@@ -128,7 +149,7 @@ const LatestNews = () => {
             key={index}
             onClick={() => setCurrentIndex(index)}
             className={`w-3 h-3 rounded-full ${
-              currentIndex === index ? 'bg-blue-500' : 'bg-gray-300'
+              currentIndex === index ? "bg-blue-500" : "bg-gray-300"
             }`}
           ></button>
         ))}

@@ -7,19 +7,25 @@ export default function Example() {
   const [agreed, setAgreed] = useState(false);
 
   return (
-    <div className="bg-white px-6 py-24 sm:py-8 lg:px-8">
+    <div className="bg-white px-6 py-6 sm:py-8 lg:px-8">
       <div className="mx-auto max-w-2xl text-center">
-        <h2 className="text-4xl font-semibold tracking-tight text-yellow-500 sm:text-5xl">
+        <h2 className="text-4xl font-semibold tracking-tight text-yellow-400 sm:text-5xl">
           CONTACTEZ NOUS
         </h2>
         <p className="mt-2 text-lg text-blue-500 italic">
           « l’Amour, c’est la Religion de Dieu »
         </p>
+        <p className="mt-2 text-lg text-gray-700 italic">
+          Vous avez une question, une préoccupation ou une suggestion à nous
+          faire parvenir ? N'hésitez pas à nous contacter. Nous serons ravis de
+          vous lire et de vous répondre dans les plus brefs délais.
+        </p>
       </div>
+      
       <form
         action="#"
         method="POST"
-        className="mx-auto mt-6 max-w-2xl sm:mt-20 shadow-lg p-6 ring-1 ring-gray-300 rounded-lg "
+        className="mx-auto mt-3 max-w-2xl sm:mt-20 shadow-lg p-2 ring-1 ring-gray-300 rounded-lg "
       >
         <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
           <div className="sm:col-span-2">

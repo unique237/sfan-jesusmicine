@@ -13,9 +13,7 @@ const Home = () => {
       <br />
       <Carousel />
       <LatestNews />
-      <h2 className="text-4xl font-bold text-center mb-6 text-yellow-400">PREDICATIONS ET PRIERES</h2>
       <LatestPredication />
-      <h2 className="text-4xl font-bold text-center mb-3 text-blue-500 pt-7">MEDIATHEQUE</h2>
       <LatestMedia />
     </div>
   )
