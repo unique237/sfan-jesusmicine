@@ -9,7 +9,6 @@ const Jesusmicine = () => {
   return (
     <div>
       <AboutJesusmicine />
-      <h2 className="text-4xl font-bold text-center mb-3 text-red-600 pt-7">LE DERNIER FESTIVAL JESUSMICINE EN IMAGE</h2>
       <LatestJesusmicine />
       <Testimonies />
       <LatestNews />

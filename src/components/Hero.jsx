@@ -21,7 +21,7 @@ const Hero = () => {
             </div>
         </div>
         {/**right side */}
-        <img className='w-full sm:w-3/5 h-[60vh]' src={assets.carousel_1} alt="" />
+        <img className='w-full sm:w-3/5 h-[60vh] object-cover' src={assets.carousel_1} alt="" />
     </div>
   )
 }

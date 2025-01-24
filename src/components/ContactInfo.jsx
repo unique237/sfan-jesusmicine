@@ -20,27 +20,27 @@ const ContactInfo = () => {
         <div className="mb-2">
           <BsFillTelephoneFill className="inline-block mr-2 text-blue-500 size-5" />
           <FaWhatsapp className="inline-block mr-2 text-green-500 size-6" />{" "}
-          Appels et WhatsApp Cameroun : (+237) 698 941 583
+          Cameroun : (+237) 698 941 583
         </div>
         <div className="mb-2">
           <BsFillTelephoneFill className="inline-block mr-2 text-blue-500 size-5" />
           <FaWhatsapp className="inline-block mr-2 text-green-500 size-6" />{" "}
-          Appels et WhatsApp Afrique : (+237) 698 734 170
+          Afrique : (+237) 698 734 170
         </div>
         <div className="mb-2">
           <BsFillTelephoneFill className="inline-block mr-2 text-blue-500 size-5" />
           <FaWhatsapp className="inline-block mr-2 text-green-500 size-6" />{" "}
-          Appels Europe, Amérique et Asie : (+237) 690 299 282
+          Europe, Amérique et Asie : (+237) 690 299 282
         </div>
         <div className="mb-2">
           <FaSms className="inline-block mr-2 text-purple-500 size-6" />
-          <FaWhatsapp className="inline-block mr-2 text-green-500 size-6" /> SMS et
-          WhatsApp Europe, Amérique et Asie : (+237) 656 911 817
+          <FaWhatsapp className="inline-block mr-2 text-green-500 size-6" />{" "}
+          Europe, Amérique et Asie : (+237) 656 911 817
         </div>
         <div className="mb-2">
           <BsFillTelephoneFill className="inline-block mr-2 text-blue-500 size-5" />
           <FaWhatsapp className="inline-block mr-2 text-green-500 size-6" />{" "}
-          Appels et WHatsapp France : (+237) 699 063 541
+          France : (+237) 699 063 541
         </div>
         <br />
         <div className="email mb-2">
@@ -49,7 +49,7 @@ const ContactInfo = () => {
         </div>
         <div className="mb-2">
           <FaMapMarkerAlt className="inline-block mr-2 text-green-500 size-8" />
-          Lieu : Cité des Miracles, Nkolo I, Nkoabang, Yaoundé-Cameroun
+          Cité des Miracles, Nkolo I, Nkoabang, Yaoundé-Cameroun
         </div>
       </div>
 

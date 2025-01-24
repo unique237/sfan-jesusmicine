@@ -1,19 +1,22 @@
 import { Card, CardHeader, CardFooter, Image, Button } from "@nextui-org/react";
 import { NavLink } from "react-router-dom";
+import { assets } from "../assets/assets";
 
 export default function LatestJesusmicine() {
   return (
-    <div className="max-w-[1600px] gap-4 grid grid-cols-12 grid-rows-1 px-8 pt-3 items-center mx-auto">
+    <div>
+      <h2 className="text-4xl font-bold text-center mb-3 text-red-600 pt-7">Le dernier festival Jésusmicine </h2> 
+      <div className="max-w-[1600px] gap-4 grid grid-cols-12 grid-rows-1 px-8 pt-3 items-center mx-auto">
       <Card isFooterBlurred className="w-full h-[350px] col-span-12 sm:col-span-5 flex flex-col items-center">
         <CardHeader className="absolute z-10 top-1 flex-col items-start text-center">
           <p className="text-tiny text-white/60 uppercase font-bold">FESTIVAL JESUSMOCINE</p>
-          <NavLink to='/'><h4 className="text-black font-medium text-2xl">Random Link</h4></NavLink>
+          <NavLink to='/'><h4 className="text-white font-medium text-2xl">Random Link</h4></NavLink>
         </CardHeader>
         <Image
           removeWrapper
           alt="Card example background"
           className="z-0 w-full h-full scale-125 -translate-y-6 object-cover"
-          src="https://nextui.org/images/card-example-6.jpeg"
+          src={assets.carousel_3}
         />
         <CardFooter className="absolute bg-white/30 bottom-0 border-t-1 border-zinc-100/50 z-10 justify-between">
           <div className="text-center">
@@ -52,6 +55,7 @@ export default function LatestJesusmicine() {
           </div>
         </CardFooter>
       </Card>
+    </div>
     </div>
   );
 }

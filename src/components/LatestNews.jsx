@@ -74,11 +74,11 @@ const LatestNews = () => {
   };
 
   return (
-    <div className="relative w-full max-w-10xl mx-auto p-6">
-      <h2 className="text-4xl font-bold text-center mb-6 text-blue-500">
+    <div className="relative w-full max-w-full mx-auto p-6">
+      <h2 className="text-3xl text-center font-bold mb-6 text-blue-500 sm:text-center">
         Dernières Actualités
       </h2>
-      <p className="text-gray-800 text-center italic px-6 mb-6">
+      <p className="text-gray-800 text-justify italic  mb-6 md:text-center w-full">
         <strong>
           Découvrez les actualités récentes de notre communauté.
         </strong>
@@ -98,7 +98,7 @@ const LatestNews = () => {
           {cards.map((card, index) => (
             <div
               key={index}
-              className={`w-[calc(100%/${cardsPerView})] flex-shrink-0 p-4`} // Dynamically adjust card width
+              className={`w-[calc(80%/${cardsPerView})] flex-shrink-0 p-4`} // Dynamically adjust card width
             >
               <div className="bg-white shadow-md rounded-lg overflow-hidden">
                 <div className="w-full h-52 relative object-cover">

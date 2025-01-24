@@ -5,10 +5,10 @@ import { assets } from "../assets/assets";
 export default function LatestMedia() {
   return (
     <div>
-      <h2 className="text-4xl font-bold text-center mb-6 text-blue-500 pt-5">
-        Dernières Actualités Médias de l'Eglise SFAN
+      <h2 className="text-4xl font-bold text-center mb-6 text-blue-500 pt-5 sm:text-center">
+        Médiathèque du SFAN
       </h2>
-      <p className="text-gray-700 italic text-center mb-5">
+      <p className="text-gray-700 italic text-justify mb-5 sm:text-center">
         <strong>
           Restez connectés pour recevoir les dernières actualités médias de
           l'Eglise SFAN. Découvrez nos derniers événements, nos projets, nos
@@ -75,11 +75,11 @@ export default function LatestMedia() {
           className="w-full h-[350px] col-span-12 sm:col-span-5 flex flex-col items-center"
         >
           <CardHeader className="absolute z-10 top-1 flex-col items-start text-center">
-            <p className="text-tiny text-white/60 uppercase font-bold">
-              Eglises SFAN
+            <p className="text-2xl text-white/60 uppercase font-bold italic">
+              Max Church
             </p>
             <NavLink to="/">
-              <h4 className="text-black font-medium text-2xl">Random Link</h4>
+              <h4 className="text-white font-medium text-2xl">Link to last church</h4>
             </NavLink>
           </CardHeader>
           <img
@@ -112,7 +112,7 @@ export default function LatestMedia() {
               La JESUSMICINE
             </p>
             <h4 className="text-white/90 font-medium text-xl">
-              Notre dernier festival!
+              Notre dernier festival en image !
             </h4>
           </CardHeader>
           <img

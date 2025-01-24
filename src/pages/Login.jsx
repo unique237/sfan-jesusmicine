@@ -1,11 +1,34 @@
 import React, { useState } from 'react';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom'; // Import for navigation
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const navigate = useNavigate(); // Initialize the navigation function
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post('http://localhost:8800/api/login', {
+        email,
+        password,
+      });
+
+      const token = response.data.token;
+      localStorage.setItem('token', token); // Save the token for authentication
+      
+      // Redirect to the admin panel after successful login
+      window.location.href = 'http://localhost:5174/';
+    } catch (error) {
+      console.error('Error during login:', error.response?.data || error.message);
+    }
   };
 
   return (
@@ -14,7 +37,7 @@ const Login = () => {
         <h2 className="text-2xl font-bold text-center mb-6 text-red-500">
           Connexion
         </h2>
-        <form>
+        <form onSubmit={handleSubmit}>
           {/* Email Field */}
           <div className="mb-6">
             <label
@@ -26,6 +49,8 @@ const Login = () => {
             <input
               type="email"
               id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               placeholder="Votre email"
               className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             />
@@ -42,6 +67,8 @@ const Login = () => {
             <input
               type={showPassword ? 'text' : 'password'}
               id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               placeholder="Votre mot de passe"
               className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             />
@@ -51,7 +78,17 @@ const Login = () => {
               onClick={togglePasswordVisibility}
               className="absolute top-1/2 right-3 transform -translate-y-1/2 text-gray-500 hover:text-gray-700 focus:outline-none"
             >
-              {showPassword ? <AiOutlineEyeInvisible className='text-center align-middle pt-4' size={30} /> : <AiOutlineEye className='text-center align-middle pt-4' size={30} />}
+              {showPassword ? (
+                <AiOutlineEyeInvisible
+                  className="text-center align-middle pt-4"
+                  size={30}
+                />
+              ) : (
+                <AiOutlineEye
+                  className="text-center align-middle pt-4"
+                  size={30}
+                />
+              )}
             </button>
           </div>
 

@@ -1,5 +1,5 @@
 import { Card, CardBody, Image, Button } from "@nextui-org/react";
-import { FaCalendar } from "react-icons/fa";
+import { FaCalendarAlt } from "react-icons/fa";
 import { assets } from "../assets/assets";
 
 export default function LatestPredication() {
@@ -40,10 +40,10 @@ export default function LatestPredication() {
 
   return (
     <div>
-      <h1 className="text-4xl font-bold text-center text-yellow-400 mb-4">
+      <h1 className="text-4xl font-bold text-center text-yellow-400 mb-4 sm:text-center">
         Dernières Prédications
       </h1>
-      <p className="text-gray-800 text-center italic px-6 mb-8">
+      <p className="text-gray-800 text-justify italic px-6 mb-8 sm:text-center">
         <strong>
           Plongez dans la Parole de Dieu et élevez vos prières ! Restez
           connectés pour recevoir les dernières prédications du Père KNING
@@ -79,13 +79,13 @@ export default function LatestPredication() {
               {/* Text Section */}
               <CardBody className="flex flex-col p-4 w-1/2 space-y-2">
                 <b className="text-lg text-red-500 italic">{item.title}</b>
-                <div className="flex items-center text-gray-500 space-x-2">
-                  <FaCalendar />
-                  <span>{item.date}</span>
-                </div>
                 <p className="text-sm text-justify leading-relaxed">
                   {item.text}
                 </p>
+                <div className="flex items-center text-gray-500 space-x-2">
+                  <FaCalendarAlt />
+                  <span>{item.date}</span>
+                </div>
               </CardBody>
             </div>
           </Card>

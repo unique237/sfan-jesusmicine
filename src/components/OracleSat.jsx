@@ -19,13 +19,13 @@ const OracleSat = () => {
             <h2 className="text-2xl font-bold mb-4 text-red-500 text-center">
               Oracle Sat
             </h2>
-            <p className="text-gray-600 mb-2">
+            <p className="text-gray-600 mb-2 text-justify">
               Oracle Sat is an innovative solution aimed at revolutionizing how we approach satellite technology and its applications. It leverages cutting-edge tools to provide seamless communication and data services.
             </p>
-            <p className="text-gray-600 mb-2">
+            <p className="text-gray-600 mb-2 text-justify">
               The project is a cornerstone for advancing our understanding of satellite infrastructure, with significant implications for both commercial and scientific sectors.
             </p>
-            <p className="text-gray-600">
+            <p className="text-gray-600 text-justify">
               Join us in exploring the future of connectivity and the boundless possibilities that Oracle Sat brings to the table.
             </p>
           </div>

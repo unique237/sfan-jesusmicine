@@ -35,12 +35,12 @@ const MediaContent = () => {
 
   return (
     <div className="p-4">
-      <h1 className="text-3xl font-bold text-center mb-8 text-green-500">Médiathèque</h1>
+      <h1 className="text-3xl font-bold text-center mb-8 text-blue-500">Médiathèque</h1>
       <div className="flex justify-center flex-wrap gap-2 mb-8">
         {categories.map(category => (
           <div
             key={category}
-            className={`p-2 cursor-pointer text-center flex-1 ${selectedCategory === category ? 'bg-blue-500 text-white' : 'bg-gray-200 sm:text-sm'}`}
+            className={`p-2 cursor-pointer text-center flex-1 text-sm ${selectedCategory === category ? 'bg-blue-500 text-white' : 'bg-gray-200 sm:text-sm'}`}
             onClick={() => handleCategoryClick(category)}
             onMouseEnter={(e) => e.currentTarget.classList.add('bg-blue-300')}
             onMouseLeave={(e) => e.currentTarget.classList.remove('bg-blue-300')}
@@ -69,9 +69,9 @@ const MediaContent = () => {
                     <p className="mt-2">Short description about the image.</p>
                   </div>
                 </div>
-                <div className="absolute bottom-2 right-2 cursor-pointer text-white" onClick={() => handleImageClick(index)}>
+                {/*<div className="absolute bottom-2 right-2 cursor-pointer text-white" onClick={() => handleImageClick(index)}>
                   {expandedImage === index ? <MdOutlineCloseFullscreen size={24} /> : <MdOutlineOpenInFull size={24} />}
-                </div>
+                </div>*/}
               </div>
             )}
           </div>

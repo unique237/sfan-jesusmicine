@@ -15,13 +15,13 @@ export default function Example() {
         <p className="mt-2 text-lg text-blue-500 italic">
           « l’Amour, c’est la Religion de Dieu »
         </p>
-        <p className="mt-2 text-lg text-gray-700 italic">
+        <p className="mt-2 text-lg text-gray-700 italic text-justify sm:text-center">
           Vous avez une question, une préoccupation ou une suggestion à nous
           faire parvenir ? N'hésitez pas à nous contacter. Nous serons ravis de
           vous lire et de vous répondre dans les plus brefs délais.
         </p>
       </div>
-      
+
       <form
         action="#"
         method="POST"
@@ -39,23 +39,6 @@ export default function Example() {
               <input
                 id="company"
                 name="noms"
-                type="text"
-                autoComplete="organization"
-                className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:outline-indigo-600"
-              />
-            </div>
-          </div>
-          <div className="sm:col-span-2">
-            <label
-              htmlFor="company"
-              className="block text-sm font-semibold text-gray-900"
-            >
-              Objet
-            </label>
-            <div className="mt-2">
-              <input
-                id="company"
-                name="objet"
                 type="text"
                 autoComplete="organization"
                 className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:outline-indigo-600"
@@ -409,6 +392,24 @@ export default function Example() {
                 <option value="KOR">Corée du Sud</option>
                 <option value="KWT">Koweït</option>
               </select>
+            </div>
+          </div>
+
+          <div className="sm:col-span-2">
+            <label
+              htmlFor="company"
+              className="block text-sm font-semibold text-gray-900"
+            >
+              Objet
+            </label>
+            <div className="mt-2">
+              <input
+                id="company"
+                name="objet"
+                type="text"
+                autoComplete="organization"
+                className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:outline-indigo-600"
+              />
             </div>
           </div>
 

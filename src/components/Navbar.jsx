@@ -124,25 +124,25 @@ const Navbar = () => {
           <NavLink onClick={() => setVisible(false)} className="py-2 pl-6 border" to="/">
             SFAN
           </NavLink>
-          <NavLink onClick={() => setVisible(false)} className="py-2 pl-6 border" to="/">
+          <NavLink onClick={() => setVisible(false)} className="py-2 pl-6 border" to="/jésusmicine">
             JESUSMICINE
           </NavLink>
-          <NavLink onClick={() => setVisible(false)} className="py-2 pl-6 border" to="/jésusmicine">
+          <NavLink onClick={() => setVisible(false)} className="py-2 pl-6 border" to="/programmes">
             PROGRAMMES
           </NavLink>
-          <NavLink onClick={() => setVisible(false)} className="py-2 pl-6 border" to="/programmes">
+          <NavLink onClick={() => setVisible(false)} className="py-2 pl-6 border" to="/actualités">
             ACTUALITES
           </NavLink>
-          <NavLink onClick={() => setVisible(false)} className="py-2 pl-6 border" to="/actualités">
+          <NavLink onClick={() => setVisible(false)} className="py-2 pl-6 border" to="/événements">
             EVENEMENTS
           </NavLink>
-          <NavLink onClick={() => setVisible(false)} className="py-2 pl-6 border" to="/événements">
+          <NavLink onClick={() => setVisible(false)} className="py-2 pl-6 border" to="/médiathèque">
             MEDIATHEQUE
           </NavLink>
-          <NavLink onClick={() => setVisible(false)} className="py-2 pl-6 border" to="/médiathèque">
+          <NavLink onClick={() => setVisible(false)} className="py-2 pl-6 border" to="/églises">
             EGLISES SFAN
           </NavLink>
-          <NavLink onClick={() => setVisible(false)} className="py-2 pl-6 border" to="/églises">
+          <NavLink onClick={() => setVisible(false)} className="py-2 pl-6 border" to="/à-propos">
             A PROPOS
           </NavLink>
           <NavLink onClick={() => setVisible(false)} className="py-2 pl-6 border" to="/à-propos/bio/père-king-joshua">

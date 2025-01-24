@@ -72,10 +72,10 @@ const Programmes = () => {
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-4xl font-bold text-center mb-8">
+      <h1 className="text-3xl text-yellow-400 font-bold text-center mb-8">
         Programmes Hebdomadaires
       </h1>
-      <p className="text-gray-600 text-center">Résumé du programme Cette section sera dédicacée aux programmes spéciaux
+      <p className="text-gray-600 text-justify sm:text-center">Résumé du programme Cette section sera dédicacée aux programmes spéciaux
          comme les festivale, les retraites et les pèlerinages, chaque programme sera composé de la date, d’une 
          image de ce programme, d’un résumé du programme etun lien qui mène vers la vidéo de ce programme qui se 
          trouve sur la page Facebook de l’église 2
@@ -95,7 +95,7 @@ const Programmes = () => {
                 />
                 <div className="flex-grow">
                   <p className="text-lg font-bold">{programme.date}</p>
-                  <p className="text-gray-600">{programme.summary}</p>
+                  <p className="text-gray-600 text-justify">{programme.summary}</p>
                   <a
                     href={programme.videoLink}
                     target="_blank"
