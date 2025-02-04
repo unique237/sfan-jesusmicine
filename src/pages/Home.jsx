@@ -9,9 +9,9 @@ import Carousel from '../components/Carousel'
 const Home = () => {
   return (
     <div>
-      <Hero />
-      <br />
+      
       <Carousel />
+      {/*<Hero />*/}
       <LatestNews />
       <LatestPredication />
       <LatestMedia />

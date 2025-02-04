@@ -1,15 +1,38 @@
-import React from "react";
-import { assets } from "../assets/assets";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import { FaRegCalendarAlt } from "react-icons/fa";
 import { IoMdShareAlt } from "react-icons/io";
 import LatestEvents from "../components/LatestEvents";
+import LatestNews from "../components/LatestNews";
 
 const Event = () => {
+  const { id } = useParams(); // Get the event_id from the URL
+  const [event, setEvent] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchEventDetails = async () => {
+      try {
+        const response = await fetch(`https://server.sfanjesusmicine.org/api/events/${id}`);
+        if (!response.ok) throw new Error("Failed to fetch event details");
+        const data = await response.json();
+        setEvent(data[0]); // Assuming the API returns an array
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchEventDetails();
+  }, [id]);
+
   const handleShare = () => {
     if (navigator.share) {
       navigator
         .share({
-          title: "Event Title",
+          title: event?.title || "Event Title",
           text: "Check out this event!",
           url: window.location.href,
         })
@@ -19,69 +42,92 @@ const Event = () => {
     }
   };
 
+  if (loading) return <div className="text-center py-8">Chargement en cours...</div>;
+  if (error) return <div className="text-center py-8 text-red-500">Erreur: {error}</div>;
+  if (!event) return <div className="text-center py-8">Aucune donnée disponible.</div>;
+
   return (
-    <div>
-      <div className="min-h-screen flex items-center justify-center bg-white py-4">
-        <div className="bg-white shadow-lg rounded-lg overflow-hidden w-full max-w-10xl mx-auto flex flex-wrap lg:flex-nowrap">
-          <div className="w-full lg:w-1/2">
+    <div className="bg-gray-50 min-h-screen">
+      {/* Event Section */}
+      <div className="container mx-auto px-4 py-12">
+        <div className="bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col lg:flex-row">
+          {/* Image Section */}
+          <div className="lg:w-1/2">
             <img
-              src={assets.img_7}
-              alt="Jesusmicine"
-              className="w-full object-cover h-full"
+              src={event.image_url || "https://via.placeholder.com/800x400"} // Fallback image
+              alt={event.title}
+              className="w-full h-full object-cover transform transition-transform duration-500 hover:scale-105"
             />
           </div>
-          <div className="w-full lg:w-1/2 p-6 flex flex-col justify-center">
-            <h2 className="text-2xl font-bold text-gray-800 mb-4 text-center">
-              Titre
-            </h2>
-            <p className="text-gray-700 mb-4">
-              Jesusmicine is an inspiring individual dedicated to spreading the
-              message of hope and love. With a passion for community service and
-              a heart full of compassion, Jesusmicine has touched the lives of
-              many. Join us in celebrating the contributions and achievements of
-              Jesusmicine. Together, we can make a difference and create a
-              brighter future for all. Join us in celebrating the contributions
-              and achievements of Jesusmicine. Together, we can make a
-              difference and create a brighter future for all. Join us in
-              celebrating the contributions and achievements of Jesusmicine.
-              Together, we can make a difference and create a brighter future
-              for all.
-            </p>
-            <span className="flex items-center mb-4">
-              <p className="flex items-center">
-                Du <FaRegCalendarAlt className="text-gray-500 mx-2" />{" "}
-                21/09/2021 .
-              </p>
-              <p className="flex items-center">
-                {" "}
-                Au <FaRegCalendarAlt className="text-gray-500 mx-2" />
-              </p>
-              <p className="flex items-center">21/09/2021</p>
-            </span>
-            <p className="text-gray-700 mb-4">
-              Participez à l'événement cliquant sur le bouton ci-dessous :
-            </p>
-            <button className="bg-blue-500 text-white px-4 py-2 rounded-lg w-1/4 mx-auto mb-4">
-              <a href="#">Participer</a>
-            </button>
 
-            <p className="text-gray-700">
-              <ul className="space-y-2">
-                <li className="flex items-start">
-                  <button
-                    onClick={handleShare}
-                    className="flex items-center text-blue-500 hover:text-blue-600"
-                  >
-                    <IoMdShareAlt className="text-gray-500 mr-2 size-6 cursor-pointer" />
-                    Partager sur les réseaux sociaux
-                  </button>
-                </li>
-              </ul>
+          {/* Content Section */}
+          <div className="lg:w-1/2 p-8 lg:p-12 flex flex-col justify-center">
+            <h2 className="text-4xl font-bold text-gray-900 mb-6 text-center lg:text-left">
+              {event.title}
+            </h2>
+            <p className="text-gray-600 leading-relaxed mb-6 text-center lg:text-left">
+              {event.description}
             </p>
+
+            {/* Date Section */}
+            <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start space-y-2 sm:space-y-0 sm:space-x-6 mb-6">
+              <div className="flex items-center text-gray-700">
+                <FaRegCalendarAlt className="text-blue-500 mr-2" />
+                <span>
+                  Du{" "}
+                  {new Date(event.start_time).toLocaleDateString("fr-FR", {
+                    day: "2-digit",
+                    month: "2-digit",
+                    year: "numeric",
+                  })}
+                </span>
+              </div>
+              <div className="flex items-center text-gray-700">
+                <FaRegCalendarAlt className="text-blue-500 mr-2" />
+                <span>
+                  Au{" "}
+                  {new Date(event.end_time).toLocaleDateString("fr-FR", {
+                    day: "2-digit",
+                    month: "2-digit",
+                    year: "numeric",
+                  })}
+                </span>
+              </div>
+            </div>
+
+            {/* Participation Button */}
+            <div className="text-center lg:text-left mb-6">
+              <p className="text-gray-600 mb-4">
+                Participez à l'événement en cliquant sur le bouton ci-dessous :
+              </p>
+              <a
+                href={event.form_link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-3 rounded-lg transition-all duration-300 transform hover:scale-105"
+              >
+                Participer
+              </a>
+            </div>
+
+            {/* Share Button */}
+            <div className="text-center lg:text-left">
+              <button
+                onClick={handleShare}
+                className="flex items-center justify-center lg:justify-start text-blue-600 hover:text-blue-700 font-semibold transition-all duration-300"
+              >
+                <IoMdShareAlt className="mr-2 size-6" />
+                Partager sur les réseaux sociaux
+              </button>
+            </div>
           </div>
         </div>
       </div>
-      <LatestEvents />
+
+      {/* Latest News Section */}
+      <div className="mt-12">
+        <LatestNews />
+      </div>
     </div>
   );
 };

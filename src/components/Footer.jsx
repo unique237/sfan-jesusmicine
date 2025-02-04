@@ -1,156 +1,177 @@
-import React from 'react';
-import { FaFacebookF, FaTwitter, FaWhatsapp, FaInstagram } from 'react-icons/fa';
-import { NavLink } from 'react-router-dom';
-import { HiChevronRight } from 'react-icons/hi';
+import React, { useState } from "react";
+import { FaFacebookF, FaTwitter, FaWhatsapp, FaInstagram, FaEnvelope, FaPhoneAlt, FaMapMarkerAlt } from "react-icons/fa";
+import { NavLink } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Footer = () => {
+  const [formData, setFormData] = useState({ email: "" });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch("https://server.sfanjesusmicine.org/api/subscription/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+      if (response.ok) {
+        toast.success("Votre souscription a réussie !");
+        setFormData({ email: "" });
+      } else {
+        toast.error("Erreur !");
+      }
+    } catch (error) {
+      toast.error("Erreur Serveur !");
+    }
+  };
+
   return (
-    <footer className="bg-white text-gray-800 py-8 pt-9">
-      <div className="max-w-7xl mx-auto px-4">
-        {/* Columns */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 border-b border-gray-300 pb-8">
-          {/* Column 1: Contact Info */}
-          <div>
-            <h3 className="text-lg font-bold mb-4 text-red-700 italic">SANCTUARY FOR ALL NATIONS</h3>
-            <h4 className="text-md font-semibold mb-2 text-gray-700">Contactez nous!</h4>
-            <ul className="space-y-2">
-              <li className="flex items-center">
-                <HiChevronRight className="text-gray-500 mr-2" />
-                <NavLink to="/contact" className="hover:underline">
-                  Contact
-                </NavLink>
-              </li>
-              <li className="flex items-center">
-                <HiChevronRight className="text-gray-500 mr-2" />
-                <a href="mailto:info@sfan.com" className="hover:underline">
-                  Email : contact@sfanjesusmicine.com
+    <footer className="bg-gray-50 text-gray-800 border-t border-gray-200">
+      <ToastContainer />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 lg:gap-12 mb-12">
+          {/* Contact Column */}
+          <div className="space-y-4">
+            <h3 className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              SANCTUARY FOR ALL NATIONS
+            </h3>
+            <div className="space-y-3">
+              <div className="flex items-start space-x-3">
+                <FaMapMarkerAlt className="flex-shrink-0 text-blue-600 mt-1" />
+                <address className="not-italic">
+                  <NavLink to="/contact" className="hover:text-blue-600 transition-colors">
+                    Adresse: Yaoundé, Cameroun
+                  </NavLink>
+                </address>
+              </div>
+              <div className="flex items-center space-x-3">
+                <FaEnvelope className="text-blue-600" />
+                <a href="mailto:contact@sfanjesusmicine.com" className="hover:text-blue-600 transition-colors">
+                  contact@sfanjesusmicine.com
                 </a>
-              </li>
-              <li className="flex items-center">
-                <HiChevronRight className="text-gray-500 mr-2" />
-                <a href="tel:+123456789" className="hover:underline">
-                  Tel : (+237) 698 941 583 
+              </div>
+              <div className="flex items-center space-x-3">
+                <FaPhoneAlt className="text-blue-600" />
+                <a href="tel:+237698941583" className="hover:text-blue-600 transition-colors">
+                  (+237) 698 941 583
                 </a>
-              </li>
-            </ul>
+              </div>
+            </div>
           </div>
 
-          {/* Column 2: Pages */}
-          <div>
-            <h3 className="text-lg font-bold mb-4 text-gray-800">Pages</h3>
-            <ul className="space-y-2">
-              <li className="flex items-center">
-                <HiChevronRight className="text-gray-500 mr-2" />
-                <NavLink to="/" className="hover:underline">
-                  SFAN
+          {/* Navigation Links */}
+          <div className="space-y-4">
+            <h3 className="text-lg font-semibold text-gray-900">Navigation</h3>
+            <nav className="space-y-2">
+              {[
+                ["SFAN", "/"],
+                ["JESUSMICINE", "/jésusmicine"],
+                ["Le Père Supérieur", "/à-propos/bio/père-king-joshua"],
+                ["Églises SFAN", "/églises"],
+              ].map(([title, path]) => (
+                <NavLink
+                  key={path}
+                  to={path}
+                  className="flex items-center space-x-2 text-gray-600 hover:text-blue-600 transition-colors"
+                >
+                  <span className="text-blue-600">•</span>
+                  <span>{title}</span>
                 </NavLink>
-              </li>
-              <li className="flex items-center">
-                <HiChevronRight className="text-gray-500 mr-2" />
-                <NavLink to="/jésusmicine" className="hover:underline">
-                  JESUSMICINE
-                </NavLink>
-              </li>
-              <li className="flex items-center">
-                <HiChevronRight className="text-gray-500 mr-2" />
-                <NavLink to="/à-propos/bio/père-king-joshua" className="hover:underline">
-                  LE PERE SUPERIEUR
-                </NavLink>
-              </li>
-              <li className="flex items-center">
-                <HiChevronRight className="text-gray-500 mr-2" />
-                <NavLink to="/églises" className="hover:underline">
-                  EGLISES SFAN
-                </NavLink>
-              </li>
-            </ul>
+              ))}
+            </nav>
           </div>
 
-          {/* Column 3: Random Stuffs */}
-          <div>
-            <h3 className="text-lg font-bold mb-4 text-gray-800">Liens Utiles</h3>
-            <ul className="space-y-2">
-              <li className="flex items-center">
-                <HiChevronRight className="text-gray-500 mr-2" />
-                <NavLink to="/contact" className="hover:underline">
-                  Contact
+          {/* Useful Links */}
+          <div className="space-y-4">
+            <h3 className="text-lg font-semibold text-gray-900">Liens Utiles</h3>
+            <nav className="space-y-2">
+              {[
+                ["Événements", "/événements"],
+                ["Médiathèque", "/médiathèque"],
+                ["Connexion", "/connexion"],
+              ].map(([title, path]) => (
+                <NavLink
+                  key={path}
+                  to={path}
+                  className="flex items-center space-x-2 text-gray-600 hover:text-blue-600 transition-colors"
+                >
+                  <span className="text-blue-600">•</span>
+                  <span>{title}</span>
                 </NavLink>
-              </li>
-              <li className="flex items-center">
-                <HiChevronRight className="text-gray-500 mr-2" />
-                <NavLink to="/événements" className="hover:underline">
-                  Evénements
-                </NavLink>
-              </li>
-              <li className="flex items-center">
-                <HiChevronRight className="text-gray-500 mr-2" />
-                <NavLink to="/connexion" className="hover:underline">
-                  Connexion
-                </NavLink>
-              </li>
-            </ul>
+              ))}
+            </nav>
           </div>
 
-          {/* Column 4: Subscribe */}
-          <div>
-            <h3 className="text-lg font-bold mb-4 text-gray-800">Souscrire</h3>
-            <p className="mb-4 text-gray-600">Recevez les messages de prières et prédications du Père KNING Joshua par mail.</p>
-            <form className="flex">
-              <input
-                type="email"
-                required
-                placeholder="Votre mail."
-                className="w-full px-4 py-2 text-gray-800 rounded-l-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-              <button
-                type="submit"
-                className="bg-blue-600 text-white px-4 py-2 rounded-r-md hover:bg-blue-700 transition"
-              >
-                Subscribe
-              </button>
+          {/* Newsletter */}
+          <div className="space-y-4">
+            <h3 className="text-lg font-semibold text-gray-900">Restez Connecté</h3>
+            <p className="text-gray-600">
+              Recevez les messages de prières et prédications du Père KING Joshua directement par mail.
+            </p>
+            <form onSubmit={handleSubmit} className="space-y-3">
+              <div className="flex rounded-lg shadow-sm">
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  placeholder="Votre adresse e-mail"
+                  required
+                  className="w-full px-4 py-3 border border-gray-300 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                />
+                <button
+                  type="submit"
+                  className="px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-r-lg hover:opacity-90 transition-opacity"
+                >
+                  Souscrire
+                </button>
+              </div>
             </form>
           </div>
         </div>
 
-        {/* Social Icons */}
-        <div className="flex justify-center mt-8 space-x-6">
-          <a
-            href="https://facebook.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-500 hover:text-gray-800"
-          >
-            <FaFacebookF size={24} />
-          </a>
-          <a
-            href="https://whatsapp.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-green-500 hover:text-gray-800"
-          >
-            <FaWhatsapp size={24} />
-          </a>
-          <a
-            href="https://twitter.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-500 hover:text-gray-800"
-          >
-            <FaTwitter size={24} />
-          </a>
-          <a
-            href="https://instagram.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-pink-500 hover:text-gray-800"
-          >
-            <FaInstagram size={24} />
-          </a>
-        </div>
-
-        {/* Copyright */}
-        <div className="text-center mt-8 text-gray-600 text-sm">
-          &copy; {new Date().getFullYear()} SFAN. Tous droits réservés.
+        {/* Social & Copyright */}
+        <div className="border-t border-gray-200 pt-8">
+          <div className="flex flex-col items-center space-y-6">
+            <div className="flex space-x-6">
+              {[
+                { icon: <FaFacebookF />, color: "text-blue-600", href: "https://facebook.com" },
+                { icon: <FaWhatsapp />, color: "text-green-600", href: "https://whatsapp.com" },
+                { icon: <FaTwitter />, color: "text-blue-400", href: "https://twitter.com" },
+                { icon: <FaInstagram />, color: "text-pink-600", href: "https://instagram.com" },
+              ].map((social, index) => (
+                <a
+                  key={index}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`${social.color} hover:opacity-75 transition-opacity text-2xl`}
+                >
+                  {social.icon}
+                </a>
+              ))}
+            </div>
+            
+            <div className="text-center text-gray-600">
+              <p className="text-sm">
+                &copy; {new Date().getFullYear()} Sanctuary For All Nations. Tous droits réservés.
+              </p>
+              <nav className="mt-2 space-x-4">
+                <NavLink to="/mentions-legales" className="text-sm hover:text-blue-600">
+                  Mentions Légales
+                </NavLink>
+                <NavLink to="/confidentialite" className="text-sm hover:text-blue-600">
+                  Politique de Confidentialité
+                </NavLink>
+              </nav>
+            </div>
+          </div>
         </div>
       </div>
     </footer>

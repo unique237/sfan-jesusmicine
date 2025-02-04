@@ -1,70 +1,69 @@
 import React from "react";
-import { assets } from "../assets/assets";
-import { HiChevronRight } from "react-icons/hi";
-
+import { NavLink } from "react-router-dom";
 
 const About = () => {
   return (
-    <div>
-      <div className="min-h-screen flex items-center justify-center bg-white py-4">
-        <div className="bg-white shadow-lg rounded-lg overflow-hidden w-full max-w-10xl mx-auto flex flex-wrap lg:flex-nowrap">
-          <div className="w-full lg:w-1/2">
-            <img
-              src={assets.img_7}
-              alt="Jesusmicine"
-              className="w-full object-cover h-full"
-            />
-          </div>
-          <div className="w-full lg:w-1/2 p-6 flex flex-col justify-center">
-            <h2 className="text-2xl font-bold text-red-600 mb-4 text-center">
-              SANCTUARY FOR ALL NATIONS
-            </h2>
-            <p className="text-gray-700 mb-4">
-              Jesusmicine is an inspiring individual dedicated to spreading the
-              message of hope and love. With a passion for community service and
-              a heart full of compassion, Jesusmicine has touched the lives of
-              many. Join us in celebrating the contributions and achievements of
-              Jesusmicine. Together, we can make a difference and create a
-              brighter future for all.
-            </p>
-            <h4 className="text-blue-500 font-semibold text-1xl text-center">
-              Histoire du SFAN
-            </h4>
-            <p className="text-gray-700">
-              Join us in celebrating the contributions and achievements of
-              Jesusmicine. Together, we can make a difference and create a
-              brighter future for all. Join us in celebrating the contributions
-              and achievements of Jesusmicine. Together, we can make a
-              difference and create a brighter future for all.
-            </p>
-            <h4 className="text-blue-500 font-semibold text-1xl text-center">
-              Grandes dates pour le SFAN
-            </h4>
-            <p className="text-gray-700">
-              <ul className="space-y-2">
-                <li className="flex items-start">
-                  <HiChevronRight className="text-gray-500 mr-2" />
-                  2010 : Contexte
-                </li>
-                <li className="flex items-start">
-                  <HiChevronRight className="text-gray-500 mr-2 items-center" />
-                  2010 : Contexte
-                </li>
-                <li className="flex items-start">
-                  <HiChevronRight className="text-gray-500 mr-2" />
-                  2011 : Contexte
-                </li>
-                <li className="flex items-start">
-                  <HiChevronRight className="text-gray-500 mr-2" />
-                  2012 : Contexte
-                </li>
-                <li className="flex items-start">
-                  <HiChevronRight className="text-gray-500 mr-2" />
-                  2013 : Contexte
-                </li>
-              </ul>
-            </p>
-          </div>
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="bg-white shadow-2xl rounded-lg overflow-hidden w-full max-w-7xl mx-auto flex flex-col lg:flex-row">
+        {/* Image Section */}
+        <div className="w-full lg:w-1/2">
+          <img
+            src="https://res.cloudinary.com/dmwo3fwvu/image/upload/v1738489688/IMG_0051_p4am70.jpg"
+            alt="Jesusmicine"
+            className="w-full h-full object-cover"
+          />
+        </div>
+
+        {/* Text Section */}
+        <div className="w-full lg:w-1/2 p-8 lg:p-12 flex flex-col justify-center">
+          {/* Title */}
+          <h2 className="text-3xl lg:text-4xl font-bold text-red-600 mb-6 text-center lg:text-left">
+            SANCTUARY FOR ALL NATIONS
+          </h2>
+
+          {/* Description */}
+          <p className="text-gray-700 text-lg leading-relaxed mb-6">
+            Sanctuary for All Nations est bien plus qu’une église ; c’est un
+            mouvement dédié à la transformation des vies et des communautés par
+            la puissance de l’Évangile. Grâce à son leadership inspiré, ses
+            ministères dynamiques et son engagement envers l’excellence, SFAN
+            demeure un phare d’espoir et d’inspiration au Cameroun et dans le
+            monde entier. Si vous recherchez une église qui allie enseignement
+            spirituel profond et impact social concret, SFAN est un modèle
+            remarquable.
+          </p>
+
+          {/* Subheading: Histoire du SFAN */}
+          <h4 className="text-blue-600 font-semibold text-xl mb-4 text-center lg:text-left">
+            Mission et Vision
+          </h4>
+          <p className="text-gray-700 text-lg leading-relaxed mb-6">
+            Sanctuary for All Nations (SFAN) est dédié à l’édification d’un
+            sanctuaire spirituel où des personnes de toutes nations peuvent
+            rencontrer Dieu, vivre une transformation profonde et accomplir leur
+            destinée divine.
+          </p>
+          <p className="text-gray-700 text-lg leading-relaxed mb-6">
+            L’église met l’accent sur la foi, l’amour et l’unité en Christ, avec
+            pour objectif d’impacter les vies tant sur le plan spirituel que
+            social.
+          </p>
+
+          <h4 className="text-blue-600 font-semibold text-xl mb-4 text-center lg:text-left">
+            Leadership
+          </h4>
+          <p className="text-gray-700 text-lg leading-relaxed mb-6">
+            SFAN est dirigée par{" "}
+            <NavLink
+              to="/à-propos/bio/père-king-joshua"
+              className="text-blue-600 font-bold italic hover:text-yellow-400 transition-colors"
+            >
+              Père King Joshua
+            </NavLink>
+            , un leader dynamique et visionnaire, reconnu pour son ministère
+            prophétique, ses enseignements inspirés et son engagement envers le
+            développement communautaire.
+          </p>
         </div>
       </div>
     </div>

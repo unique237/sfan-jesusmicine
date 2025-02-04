@@ -1,84 +1,191 @@
-import React, { useState } from 'react'
-import { assets } from '../assets/assets'
-import { MdOutlineOpenInFull, MdOutlineCloseFullscreen } from "react-icons/md"
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { MdPlayCircleFilled } from "react-icons/md";
 
 const categories = [
-  'Média',
-  'Productions musicales',
-  'Prières Miraculeuses du Père KING',
-  'Prier avec Père King'
-]
-
-const categoryData = {
-  'Média': [assets.img_1, assets.img_2, assets.img_3, assets.img_4],
-  'Productions musicales': [
-    "https://www.youtube.com/embed/Pf_zSJkCQDo",
-    "https://www.youtube.com/embed/Pf_zSJkCQDo",
-    "https://www.youtube.com/embed/Pf_zSJkCQDo",
-    "https://www.youtube.com/embed/Pf_zSJkCQDo"
-  ],
-  'Prières Miraculeuses du Père KING': [assets.img_5, assets.img_6, assets.img_7],
-  'Prier avec Père King': [assets.img_8, assets.img_9],
-}
+  "Média",
+  "Productions musicales",
+  "Prières Miraculeuses du Père KING",
+  "Prier avec Père King",
+];
 
 const MediaContent = () => {
-  const [selectedCategory, setSelectedCategory] = useState(categories[0])
-  const [expandedImage, setExpandedImage] = useState(null)
+  const [selectedCategory, setSelectedCategory] = useState(categories[0]);
+  const [mediaData, setMediaData] = useState([]);
+  const [productionVideos, setProductionVideos] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [fullscreenVideo, setFullscreenVideo] = useState(null);
+
+  useEffect(() => {
+    const fetchMedia = async () => {
+      setLoading(true);
+      setError(null);
+
+      let endpoint = "";
+      if (selectedCategory === "Média") {
+        endpoint = "https://server.sfanjesusmicine.org/api/media";
+      } else if (selectedCategory === "Prières Miraculeuses du Père KING") {
+        endpoint = "https://server.sfanjesusmicine.org/api/media/miracle";
+      } else if (selectedCategory === "Prier avec Père King") {
+        endpoint = "https://server.sfanjesusmicine.org/api/media/pray";
+      }
+
+      if (endpoint) {
+        try {
+          const response = await axios.get(endpoint);
+          setMediaData(response.data);
+        } catch (err) {
+          setError("Failed to fetch media.");
+        }
+      }
+      setLoading(false);
+    };
+
+    const fetchProductions = async () => {
+      if (selectedCategory === "Productions musicales") {
+        setLoading(true);
+        try {
+          const response = await axios.get(
+            "https://server.sfanjesusmicine.org/api/productions"
+          );
+          setProductionVideos(response.data);
+        } catch (err) {
+          setError("Failed to fetch production videos.");
+        }
+        setLoading(false);
+      }
+    };
+
+    if (selectedCategory !== "Productions musicales") {
+      fetchMedia();
+    } else {
+      fetchProductions();
+    }
+  }, [selectedCategory]);
 
   const handleCategoryClick = (category) => {
-    setSelectedCategory(category)
-  }
-
-  const handleImageClick = (index) => {
-    setExpandedImage(expandedImage === index ? null : index)
-  }
+    setSelectedCategory(category);
+  };
 
   return (
-    <div className="p-4">
-      <h1 className="text-3xl font-bold text-center mb-8 text-blue-500">Médiathèque</h1>
-      <div className="flex justify-center flex-wrap gap-2 mb-8">
-        {categories.map(category => (
-          <div
+    <div className="p-6 max-w-7xl mx-auto">
+      <h1 className="text-4xl font-bold text-center mb-8 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+        Médiathèque
+      </h1>
+
+      {/* Category Selector */}
+      <div className="flex justify-center flex-wrap gap-3 mb-12">
+        {categories.map((category) => (
+          <button
             key={category}
-            className={`p-2 cursor-pointer text-center flex-1 text-sm ${selectedCategory === category ? 'bg-blue-500 text-white' : 'bg-gray-200 sm:text-sm'}`}
+            className={`px-6 py-3 rounded-xl transition-all duration-300 font-medium ${
+              selectedCategory === category
+                ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg"
+                : "bg-gray-100 text-gray-600 hover:bg-gray-200 hover:text-gray-800"
+            }`}
             onClick={() => handleCategoryClick(category)}
-            onMouseEnter={(e) => e.currentTarget.classList.add('bg-blue-300')}
-            onMouseLeave={(e) => e.currentTarget.classList.remove('bg-blue-300')}
           >
             {category}
-          </div>
+          </button>
         ))}
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-        {categoryData[selectedCategory].map((item, index) => (
-          <div key={index} className="relative">
-            {item.startsWith("https") ? (
-              <iframe
-                className="h-48 w-full"
-                src={item}
-                title={`video-${index}`}
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              ></iframe>
-            ) : (
-              <div className={`relative ${expandedImage === index ? 'h-full w-full' : 'h-48 w-full'} bg-center bg-cover`} style={{ backgroundImage: `url(${item})` }}>
-                <div className="absolute inset-0 bg-black opacity-0 hover:opacity-75 transition-opacity flex justify-center items-center">
-                  <div className="text-white text-center">
-                    <h2 className="text-xl font-bold">Image Title</h2>
-                    <p className="mt-2">Short description about the image.</p>
+
+      {/* Content Display */}
+      {loading && (
+        <div className="text-center text-gray-500 animate-pulse">
+          Chargement en cours...
+        </div>
+      )}
+
+      {error && (
+        <div className="text-center text-red-500 bg-red-50 p-4 rounded-xl">
+          ⚠️ {error}
+        </div>
+      )}
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        {selectedCategory === "Productions musicales"
+          ? productionVideos.map((video, index) => (
+              <div
+                key={index}
+                className="group relative bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden cursor-pointer"
+              >
+                <div className="relative aspect-video bg-gray-100">
+                  <iframe
+                    className="w-full h-full object-cover"
+                    src={video.video_url}
+                    title={video.title}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  />
+                  <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
+                    <MdPlayCircleFilled className="text-white text-5xl" />
                   </div>
                 </div>
-                {/*<div className="absolute bottom-2 right-2 cursor-pointer text-white" onClick={() => handleImageClick(index)}>
-                  {expandedImage === index ? <MdOutlineCloseFullscreen size={24} /> : <MdOutlineOpenInFull size={24} />}
-                </div>*/}
-              </div>
-            )}
-          </div>
-        ))}
-      </div>
-    </div>
-  )
-}
 
-export default MediaContent
+                <div className="p-6">
+                  <h3 className="text-xl font-bold text-gray-800 mb-2">
+                    {video.title}
+                  </h3>
+                  <p className="text-gray-600 text-sm line-clamp-3">
+                    {video.context}
+                  </p>
+                  {video.date && (
+                    <p className="text-sm text-gray-400 mt-3">
+                      {new Date(video.date).toLocaleDateString("fr-FR")}
+                    </p>
+                  )}
+                </div>
+              </div>
+            ))
+          : mediaData.map((item, index) => (
+              <div
+                key={index}
+                className="relative group rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300"
+              >
+                <div
+                  className="relative aspect-square bg-gray-100 bg-cover bg-center"
+                  style={{ backgroundImage: `url(${item.image_url})` }}
+                >
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
+                    <div className="text-white">
+                      <h2 className="text-xl font-bold mb-2">{item.context}</h2>
+                      <button
+                        className="px-5 py-2 bg-white/10 backdrop-blur-sm rounded-lg hover:bg-white/20 transition-colors"
+                        onClick={() => window.open(item.link, "_blank")}
+                      >
+                        Voir plus →
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+      </div>
+
+      {/* Fullscreen Video Modal */}
+      {fullscreenVideo && (
+        <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4">
+          <div className="w-full max-w-4xl aspect-video bg-black rounded-xl overflow-hidden">
+            <iframe
+              width="100%"
+              height="100%"
+              src={fullscreenVideo}
+              allowFullScreen
+              className="rounded-xl"
+            />
+          </div>
+          <button
+            onClick={() => setFullscreenVideo(null)}
+            className="absolute top-6 right-6 text-white text-4xl hover:text-gray-200 transition-colors"
+          >
+            &times;
+          </button>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default MediaContent;

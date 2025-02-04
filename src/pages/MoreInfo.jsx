@@ -1,80 +1,127 @@
-import React from "react";
-import { assets } from "../assets/assets";
-import { FaRegCalendarAlt } from "react-icons/fa";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { FaRegCalendarAlt, FaExternalLinkAlt } from "react-icons/fa";
 import { IoMdShareAlt } from "react-icons/io";
 import LatestNews from "../components/LatestNews";
 
 const MoreInfo = () => {
+  const { id } = useParams();
+  const [news, setNews] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchNewsDetails = async () => {
+      try {
+        const response = await fetch(`https://server.sfanjesusmicine.org/api/news/${id}`);
+        if (!response.ok) throw new Error("Failed to fetch news details");
+        const data = await response.json();
+        // Ensure data is an object and not an array
+        setNews(Array.isArray(data) ? data[0] : data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchNewsDetails();
+  }, [id]);
+
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return !isNaN(date.getTime())
+      ? date.toLocaleDateString("fr-FR", { day: "2-digit", month: "long", year: "numeric" })
+      : "Date invalide";
+  };
+
   const handleShare = () => {
     if (navigator.share) {
       navigator
         .share({
-          title: "Event Title",
-          text: "Check out this event!",
+          title: news.title,
+          text: "Découvrez cet article intéressant !",
           url: window.location.href,
         })
         .catch((error) => console.error("Error sharing", error));
     } else {
-      alert("Sharing not supported on this browser");
+      alert("Le partage n'est pas pris en charge sur ce navigateur.");
     }
   };
 
-  return (
-    <div>
-      <div className="min-h-screen flex items-center justify-center bg-white py-4">
-        <div className="bg-white shadow-lg rounded-lg overflow-hidden w-full max-w-10xl mx-auto flex flex-wrap lg:flex-nowrap">
-          <div className="w-full lg:w-1/2">
-            <img
-              src={assets.img_7}
-              alt="Jesusmicine"
-              className="w-full object-cover h-full"
-            />
-          </div>
-          <div className="w-full lg:w-1/2 p-6 flex flex-col justify-center">
-            <h2 className="text-2xl font-bold text-gray-800 mb-4 text-center">
-              Titre de l'information
-            </h2>
-            <p className="text-gray-700 mb-4">
-              Jesusmicine is an inspiring individual dedicated to spreading the
-              message of hope and love. With a passion for community service and
-              a heart full of compassion, Jesusmicine has touched the lives of
-              many. Join us in celebrating the contributions and achievements of
-              Jesusmicine. Together, we can make a difference and create a
-              brighter future for all. Join us in celebrating the contributions
-              and achievements of Jesusmicine. Together, we can make a
-              difference and create a brighter future for all. Join us in
-              celebrating the contributions and achievements of Jesusmicine.
-              Together, we can make a difference and create a brighter future
-              for all.
-            </p>
-            <span className="flex items-center mb-4">
-              <p className="flex items-center">
-                <FaRegCalendarAlt className="text-gray-500 mx-2" />{" "}
-                21/09/2021
-              </p>
-            </span>
-            
-            <button className="bg-blue-500 text-white px-4 py-2 rounded-lg w-1/2 mx-auto mb-4">
-              <a href="#">Voir sur Facebook</a>
-            </button>
+  if (loading) {
+    return <div className="text-center py-8">Chargement en cours...</div>;
+  }
 
-            <p className="text-gray-700">
-              <ul className="space-y-2">
-                <li className="flex items-start">
-                  <button
-                    onClick={handleShare}
-                    className="flex items-center text-blue-500 hover:text-blue-600"
-                  >
-                    <IoMdShareAlt className="text-gray-500 mr-2 size-6 cursor-pointer" />
-                    Partager sur les réseaux sociaux
-                  </button>
-                </li>
-              </ul>
-            </p>
+  if (error) {
+    return <div className="text-center py-8 text-red-500">Erreur: {error}</div>;
+  }
+
+  if (!news) {
+    return <div className="text-center py-8">Aucune donnée disponible.</div>;
+  }
+
+  return (
+    <div className="bg-gray-100 min-h-screen py-10 px-4">
+      <div className="max-w-5xl mx-auto bg-white shadow-lg rounded-xl overflow-hidden">
+        {/* Image Section */}
+        <div className="relative h-96">
+          <img
+            src={news.image_url || "https://via.placeholder.com/800x400"} // Fallback image
+            alt={news.title}
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent"></div>
+        </div>
+
+        {/* Content Section */}
+        <div className="p-8">
+          <h2 className="text-4xl font-bold text-gray-800 mb-4">{news.title}</h2>
+
+          {/* Category Badge */}
+          <span className="inline-block bg-blue-100 text-blue-800 text-sm font-semibold px-3 py-1 rounded-full mb-4">
+            {news.category}
+          </span>
+
+          {/* Date */}
+          <div className="flex items-center text-gray-600 mb-4">
+            <FaRegCalendarAlt className="mr-2 text-blue-500" />
+            <span>{formatDate(news.publish_date)}</span>
           </div>
+
+          {/* Content */}
+          <p className="text-gray-700 leading-relaxed mb-6 whitespace-pre-line">
+            {news.content}
+          </p>
+
+          {/* External Link Button (if available) */}
+          {news.external_link && (
+            <a
+              href={news.external_link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center text-blue-600 hover:text-blue-800 font-semibold transition duration-300 mb-4"
+            >
+              {news.external_link_description || "Voir plus"}{" "}
+              <FaExternalLinkAlt className="ml-2" />
+            </a>
+          )}
+
+          {/* Share Button */}
+          <button
+            onClick={handleShare}
+            className="flex items-center bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2 rounded-lg transition duration-300"
+          >
+            <IoMdShareAlt className="mr-2 size-6" />
+            Partager sur les réseaux sociaux
+          </button>
         </div>
       </div>
-      <LatestNews />
+
+      {/* Latest News Section */}
+      <div className="mt-10">
+        <LatestNews />
+      </div>
     </div>
   );
 };

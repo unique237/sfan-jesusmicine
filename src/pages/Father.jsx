@@ -1,5 +1,4 @@
 import React from "react";
-import { assets } from "../assets/assets";
 import Testimonies from "../components/Testimonies";
 
 const Father = () => {
@@ -7,9 +6,9 @@ const Father = () => {
     <div className="container mx-auto p-4">
       <div className="flex flex-col md:flex-row items-center">
         <img
-          src={assets.king}
+          src="https://res.cloudinary.com/dmwo3fwvu/image/upload/v1738489226/IMG_0055_ebotxg.jpg"
           alt="King"
-          className="w-full md:w-1/3 h-[80vh] object-fill"
+          className="w-full md:w-2/5 h-[60vh] object-fill sm:h-[80vh]"
         />
 
         <div className="flex-1 md:ml-4">
@@ -18,25 +17,32 @@ const Father = () => {
           </h1>
 
           <p className="mb-4">
-            Père King Joshua Love, est le Père Supérieur et Fondateur de la Méga
-            Eglise Sanctuaire Pour Toutes les Nations (SFAN), Terre Sainte et
-            lieu de pèlerinage, Auditorium de plus de 12 000 (douze mille)
-            places situé à Nkoabang (banlieue Est de Yaoundé, la Capitale
-            Politique du Cameroun), qui compte à ce jour, un réseau de centaines
-            d’Eglises sur le plan national et international. Il est également le
-            Président Fondateur de l’International Love Institute, Institut
-            Biblique et Théologique de formation des Pasteurs et des Ministres
-            de Culte ; et Fondateur de la Global Academy of Success qui est une
-            académie spécialisée dans la formation des Leaders, le coaching et
-            le mentoring. Il est en outre le Président de la Congrégation
-            Baptiste Camerounaise RCE, plateforme regroupant un millier
-            d’Eglises au Cameroun.
+            Père King G. Joshua Love, est le pasteur principal et fondateur de
+            la Méga église Sanctuaire Pour Toutes les Nations (SFAN), Terre
+            sainte et lieu de pèlerinage, auditorium de plus de 12 000 (douze
+            mille) place située à Nkoabang (banlieue Est de Yaoundé, la capitale
+            Politique du Cameroun), qui compte à ce jour, un réseau d’une
+            centaine d’églises sur le plan national et international. Il est
+            également le Président fondateur de l’International Love Institut,
+            Institut biblique et théologique de formations des Pasteurs et des
+            Ministres du culte, et Fondateur de la Global Academy of Success qui
+            est une académie spécialisée dans la formation des Leaders, le
+            coaching et le mentoring. Il est en outre de Président de la
+            Congrégation Baptiste Camerounaise RCE, plateforme regroupant un
+            millier d’Eglises au Cameroun.
           </p>
 
           <p className="mb-4">
             Conférencier international, il reçoit l’appel de Dieu à l’âge de 10
             ans. A 14 ans, il prêche à des foules nombreuses, l’Amour
             inconditionnel de Dieu et le salut à ceux qui croient.
+          </p>
+
+          <p className="mb-4">
+            Il a co-fondé la King Dream’s World Foundation qui est une ONG
+            caritative pour l’encadrement et le soutien des veuves, des
+            orphelins, des personnes souffrant d’un handicap et des personnes
+            nécessiteuses.
           </p>
 
           <p className="mb-4">
@@ -55,9 +61,10 @@ const Father = () => {
             sont le quotidien de cet Homme de Dieu.
           </p>
 
-          <h2 className="text-xl font-semibold mb-3 text-red-600">
+          {/*<h2 className="text-xl font-semibold mb-3 text-red-600">
             Prophéties
-          </h2>
+          </h2>*/}
+          
           <p className="mb-4">
             La chronique de prophéties de ce Prophète des Nations est
             remarquable : sur son pays, sur la sous région CEMAC, sur l’Afrique,
@@ -111,7 +118,7 @@ const Father = () => {
         Joshua Love est père de 5 enfants.
       </p>
       <p className="mb-4">
-      Son credo <strong>« l’Amour, c’est la Religion de Dieu »</strong>. 
+        Son credo <strong>« l’Amour, c’est la Religion de Dieu »</strong>.
       </p>
     </div>
   );

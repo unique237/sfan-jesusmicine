@@ -21,10 +21,11 @@ import Footer from "./components/Footer";
 
 const App = () => {
   return (
-    <div className="px-4 sm:px-[7vw] md:px-[vw] lg:px-[2vw]">
+    <div className="">
       {/**priginal lg:px-[9vw] */}
       <Navbar />
-      <hr className="w-fullborder-none h-[1.5px] bg-gray-700 items-center" />
+      {/*<hr className="w-fullborder-none h-[1.5px] bg-gray-700 items-center" />*/}
+      <div className="px-4 sm:px-[7vw] md:px-[vw] lg:px-[2vw]">
       <Routes>
         <Route path="*" element={<NoPage />} />
         <Route path="/" element={<Home />} />
@@ -39,10 +40,11 @@ const App = () => {
         <Route path="/contact" element={<Contact />} />
         <Route path="/connexion" element={<Login />} />
         <Route path="/demade/prière" element={<RequestPrayer />} />
-        <Route path="/actualités/article" element={<MoreInfo />} />
-        <Route path="/événements/événement" element={<Event />} />
+        <Route path="/actualités/article/:id" element={<MoreInfo />} />
+        <Route path="/événements/événement/:id" element={<Event />} />
         
       </Routes>
+      </div>
       <br /> <br />
       <hr className="h-full bg-gray-800" />
       <div className="px-4 sm:px-[0vw] md:px-[0vw] lg:px-[0vw]">
