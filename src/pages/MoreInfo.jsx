@@ -13,7 +13,7 @@ const MoreInfo = () => {
   useEffect(() => {
     const fetchNewsDetails = async () => {
       try {
-        const response = await fetch(`https://server.sfanjesusmicine.org/api/news/${id}`);
+        const response = await fetch(`http://localhost:3001/api/news/${id}`);
         if (!response.ok) throw new Error("Failed to fetch news details");
         const data = await response.json();
         // Ensure data is an object and not an array

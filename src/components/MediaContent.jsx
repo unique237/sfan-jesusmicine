@@ -24,11 +24,11 @@ const MediaContent = () => {
 
       let endpoint = "";
       if (selectedCategory === "Média") {
-        endpoint = "https://server.sfanjesusmicine.org/api/media";
+        endpoint = "http://localhost:3001/api/media";
       } else if (selectedCategory === "Prières Miraculeuses du Père KING") {
-        endpoint = "https://server.sfanjesusmicine.org/api/media/miracle";
+        endpoint = "http://localhost:3001/api/media/miracle";
       } else if (selectedCategory === "Prier avec Père King") {
-        endpoint = "https://server.sfanjesusmicine.org/api/media/pray";
+        endpoint = "http://localhost:3001/api/media/pray";
       }
 
       if (endpoint) {
@@ -47,7 +47,7 @@ const MediaContent = () => {
         setLoading(true);
         try {
           const response = await axios.get(
-            "https://server.sfanjesusmicine.org/api/productions"
+            "http://localhost:3001/api/productions"
           );
           setProductionVideos(response.data);
         } catch (err) {

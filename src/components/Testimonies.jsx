@@ -18,7 +18,7 @@ const Testimonies = () => {
   useEffect(() => {
     const fetchTestimonials = async () => {
       try {
-        const response = await fetch("https://server.sfanjesusmicine.org/api/testimonies");
+        const response = await fetch("http://localhost:3001/api/testimonies");
         if (!response.ok) throw new Error("Network response was not ok");
         const data = await response.json();
         setTestimonials(data);

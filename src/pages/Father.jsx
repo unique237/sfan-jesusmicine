@@ -8,7 +8,7 @@ const Father = () => {
         <img
           src="https://res.cloudinary.com/dmwo3fwvu/image/upload/v1738489226/IMG_0055_ebotxg.jpg"
           alt="King"
-          className="w-full md:w-2/5 h-[60vh] object-fill sm:h-[80vh]"
+          className="w-full md:w-2/5 h-[60vh] object-fill sm:h-[80vh] sm:w-[3/5]"
         />
 
         <div className="flex-1 md:ml-4">

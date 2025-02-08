@@ -14,7 +14,7 @@ const Event = () => {
   useEffect(() => {
     const fetchEventDetails = async () => {
       try {
-        const response = await fetch(`https://server.sfanjesusmicine.org/api/events/${id}`);
+        const response = await fetch(`http://localhost:3001/api/events/${id}`);
         if (!response.ok) throw new Error("Failed to fetch event details");
         const data = await response.json();
         setEvent(data[0]); // Assuming the API returns an array

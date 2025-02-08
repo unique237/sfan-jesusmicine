@@ -15,7 +15,7 @@ const Footer = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("https://server.sfanjesusmicine.org/api/subscription/submit", {
+      const response = await fetch("http://localhost:3001/api/subscription/submit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -162,14 +162,14 @@ const Footer = () => {
               <p className="text-sm">
                 &copy; {new Date().getFullYear()} Sanctuary For All Nations. Tous droits réservés.
               </p>
-              <nav className="mt-2 space-x-4">
+              {/*<nav className="mt-2 space-x-4">
                 <NavLink to="/mentions-legales" className="text-sm hover:text-blue-600">
                   Mentions Légales
                 </NavLink>
                 <NavLink to="/confidentialite" className="text-sm hover:text-blue-600">
                   Politique de Confidentialité
                 </NavLink>
-              </nav>
+              </nav>*/}
             </div>
           </div>
         </div>

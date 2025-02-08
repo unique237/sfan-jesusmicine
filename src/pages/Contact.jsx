@@ -31,7 +31,7 @@ export default function Example() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("https://server.sfanjesusmicine.org/api/contact/submit", {
+      const response = await fetch("https://backend.sfanjesusmicine.org/api/contact/submit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),

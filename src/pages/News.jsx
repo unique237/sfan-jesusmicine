@@ -10,7 +10,7 @@ const News = () => {
   useEffect(() => {
     const fetchNews = async () => {
       try {
-        const response = await fetch("https://server.sfanjesusmicine.org/api/news");
+        const response = await fetch("http://localhost:3001/api/news");
         if (!response.ok) {
           throw new Error("Failed to fetch news");
         }

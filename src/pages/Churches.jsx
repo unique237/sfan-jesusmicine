@@ -4,7 +4,7 @@ import { FaMapMarkerAlt } from 'react-icons/fa';
 const Churches = () => {
   const [category, setCategory] = useState('National');
   const [churches, setChurches] = useState([]);
-  const API_URL = 'https://server.sfanjesusmicine.org/api';
+  const API_URL = 'http://localhost:3001/api';
 
   useEffect(() => {
     const fetchChurches = async () => {

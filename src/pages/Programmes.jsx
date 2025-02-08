@@ -21,7 +21,7 @@ const Programmes = () => {
       try {
         setLoading(true);
         const response = await fetch(
-          `http://localhost:8800/api${categoryEndpoints[selectedCategory]}`
+          `http://localhost:3001/api${categoryEndpoints[selectedCategory]}`
         );
         if (!response.ok) throw new Error("Network response was not ok");
         const data = await response.json();

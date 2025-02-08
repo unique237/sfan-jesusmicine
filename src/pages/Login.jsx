@@ -16,7 +16,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('https://server.sfanjesusmicine.org/api/login', {
+      const response = await axios.post('https://backend.sfanjesusmicine.org/api/login', {
         email,
         password,
       });
